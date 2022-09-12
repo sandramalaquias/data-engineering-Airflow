@@ -119,6 +119,8 @@ In the Airflow UI DAG, start "udacity_project5". This DAG will be running automa
 
 <a href="https://ibb.co/KDZ2Dw6"><img src="https://i.ibb.co/68hH8BY/udacity-project5-Graph-Airflor.png" alt="udacity-project5-Graph-Airflor" border="0"></a>
 
+This scripts is in dags folders - udacity.py
+
 ## The environment:
 All the environment are in Airflow docker image .
 
