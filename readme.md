@@ -63,10 +63,7 @@ This project is using  <a href="https://airflow.apache.org/docs/docker-stack/">A
 
 ## Load scripts folders into Airflow
 
-Follow this image to put all files in the correct folder to process the DAG.
-At scripts, all imports follow that and all this scripts will be used.
-
-<a href="https://imgbb.com/"><img src="https://i.ibb.co/2nsxTSX/Airflow-Folder.png" alt="Airflow Folder" border="0"></a>
+Put the dags folder in Airflow dags. At scripts, all imports follow this distribuition and all of scripts will be used.
 
 ## Configure the AWS connections
 
@@ -96,7 +93,7 @@ At scripts, all imports follow that and all this scripts will be used.
 		- Login: your AWS access key
 		- Password: your AWS secret key 
 		- 
-4. When the project finished, disable your AWS resources.  Follow <a href="https://github.com/sandramalaquias/data-engineering-Redshift/blob/master/README.md#aws-desconnect/">Desable AWS resources with Boto3</a>
+4. When the project finished, disable your AWS resources.  Follow <a href="https://github.com/sandramalaquias/data-engineering-Redshift/blob/master/README.md#aws-desconnect/">Disable AWS resources with Boto3</a>
 		
 ## Configure the airflow variables
 Insert the variables used in this project.
@@ -119,7 +116,7 @@ In the Airflow UI DAG, start "udacity_project5". This DAG will be running automa
 
 <a href="https://ibb.co/KDZ2Dw6"><img src="https://i.ibb.co/68hH8BY/udacity-project5-Graph-Airflor.png" alt="udacity-project5-Graph-Airflor" border="0"></a>
 
-This scripts is in dags folders - udacity.py
+This DAG is in "udacity.py".
 
 ## The environment:
 All the environment are in Airflow docker image .
@@ -140,7 +137,7 @@ With dimension and fact operators, utilize the provided SQL helper class to run 
 ### Data Quality Operator
 ##### data_quality.py
 
-With data quality operator, which is used to run checks on the data itself. The operator's main functionality is to receive one or more SQL based test cases along with the expected results and execute the tests. For each the test, the test result and expected result needs to be checked and if there is no match, the operator should raise an exception and the task should retry and fail eventually.
+With data quality operator, which is used to run checks on the data itself. The operator's main functionality is to receive one or more SQL based test cases along with the expected results and execute the tests. For each test, the result and expected result needs to be checked and if there is no match, the operator should raise an exception and the task should retry and fail eventually.
 
 ##### HasRows Operator - has_rows.py
 
@@ -149,8 +146,7 @@ This operator, works like a quality check and verify if exists rows in table, an
 ## Helpers description
 
 ### Sql Create Tables - sql_create_tables.py  
-In that scriptdescription
- is the class SqlCreateTables, that contain  the SQL needed to create all of tables. In CREATE statements have the clause "IF NOT EXISTS" and due that, is possible to run the DAG without issues. If need to include more tables in the DAG, just update this script.
+In that script description is the class SqlCreateTables, that contain  the SQL needed to create all of tables. In CREATE statements have the clause "IF NOT EXISTS" and due that, is possible to run the DAG without issues. If need to include more tables in the DAG, just update this script.
 
 ### Sql Queries - sql_queries.py
 In that script is the class SqlQueries, that contain  the SQL needed load the dimension tables. and the SQL for quality purpose.
