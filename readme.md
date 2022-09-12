@@ -1,4 +1,3 @@
-﻿
 ![sparkfy](https://github.com/sandramalaquias/data-engineering-Redshift/blob/4184288175034ba8a580a25b533a4ed289c9caf5/sparkfy.png)
 
 # Project: Data Pipelines with Apache Airflow
@@ -60,7 +59,7 @@ This dataset was distributed into time, users, and songs_play table.
 
 Airflow has an official Dockerfile and Docker image published in DockerHub as a convenience package for installation. You can extend and customize the image according to your requirements and use it in your own deployments.
 
-This project is using [Apache Airflow] (https://airflow.apache.org/docs/docker-stack/) Version: [v2.3.3].
+This project is using  <a href="https://airflow.apache.org/docs/docker-stack/">Apache Airflow - Docker - version [v2.3.3]</a> 
 
 ## Load scripts folders into Airflow
 
@@ -72,7 +71,7 @@ At scripts, all imports follow that and all this scripts will be used.
 ## Configure the AWS connections
 
 1. Launch AWS Redshift Cluster
-	  Follow the instruction at (https://github.com/sandramalaquias/data-engineering-Redshift/blob/master/README.md#run-the-scripts) - steps 1, 2 and 3.
+	  Follow the instruction <a href="https://github.com/sandramalaquias/data-engineering-Redshift/blob/master/README.md#run-the-scripts/">Launch Redshift using Boto3</a> steps: 1, 2 and 3.
 	  
      Get cluster endpoint that was showed on terminal, example: {'Address': 'dwhcluster.xxxxxxxxx.us-west-2.redshift.amazonaws.com'
    
@@ -86,7 +85,7 @@ At scripts, all imports follow that and all this scripts will be used.
 		- Login: "dwuser" (db user)
 		- Password: "xxxx" (your db user password)
 		- Port: 5439
-	If you follow the script mentioned above to launch AWS Redshift Cluster , Login and Password are in dwh.cfg in fields: "dwh_db_user" and "dwh_db_password".### AWS desconnect 
+	If you follow the script mentioned above to launch AWS Redshift Cluster , Login and Password are in dwh.cfg in fields: "dwh_db_user" and "dwh_db_password".
 
 3. In Airflow, create AWS connection
 	Choose -> Admin > Connection -> + (add a new record) using:
@@ -97,8 +96,7 @@ At scripts, all imports follow that and all this scripts will be used.
 		- Login: your AWS access key
 		- Password: your AWS secret key 
 		- 
-4. When the project finished, disable your AWS resources.  Follow (https://github.com/sandramalaquias/data-engineering-Redshift/blob/master/README.md#aws-desconnect) 
-
+4. When the project finished, disable your AWS resources.  Follow <a href="https://github.com/sandramalaquias/data-engineering-Redshift/blob/master/README.md#aws-desconnect/">Desable AWS resources with Boto3</a>
 		
 ## Configure the airflow variables
 Insert the variables used in this project.
@@ -121,34 +119,38 @@ In the Airflow UI DAG, start "udacity_project5". This DAG will be running automa
 
 <a href="https://ibb.co/KDZ2Dw6"><img src="https://i.ibb.co/68hH8BY/udacity-project5-Graph-Airflor.png" alt="udacity-project5-Graph-Airflor" border="0"></a>
 
-### The environment:
+## The environment:
 All the environment are in Airflow docker image .
 
 ## Operators description
 All of the operators and task instances will run SQL statements against the Redshift database. However, using parameters wisely will allow to build flexible, reusable, and configurable operators that can later apply to many kinds of data pipelines with Redshift and with other databases.
 
 ### Stage Operator
+##### stage_redshift.py
 
 The stage operator is expected to be able to load any JSON formatted files from S3 to Amazon Redshift. The operator creates and runs a SQL COPY statement based on the parameters provided. The operator's parameters should specify where in S3 the file is loaded and what is the target table.
 
 ### Fact and Dimension Operators
+##### Load_dimension.py  and  load_fact.py
 
 With dimension and fact operators, utilize the provided SQL helper class to run data transformations. Most of the logic is within the SQL transformations and the operator is expected to take as input a SQL statement and target database on which to run the query against. 
 
 ### Data Quality Operator
+##### data_quality.py
 
 With data quality operator, which is used to run checks on the data itself. The operator's main functionality is to receive one or more SQL based test cases along with the expected results and execute the tests. For each the test, the test result and expected result needs to be checked and if there is no match, the operator should raise an exception and the task should retry and fail eventually.
 
-### HasRows Operator
+##### HasRows Operator - has_rows.py
 
 This operator, works like a quality check and verify if exists rows in table, and get raise an exception if no records was found.
 
 ## Helpers description
 
-### Sql Create Tables
-In that script is the class SqlCreateTables, that contain  the SQL needed to create all of tables. In CREATE statements have the clause "IF NOT EXISTS" and due that, is possible to run the DAG without issues. If need to include more tables in the DAG, just update this script.
+### Sql Create Tables - sql_create_tables.py  
+In that scriptdescription
+ is the class SqlCreateTables, that contain  the SQL needed to create all of tables. In CREATE statements have the clause "IF NOT EXISTS" and due that, is possible to run the DAG without issues. If need to include more tables in the DAG, just update this script.
 
-### Sql Queries
+### Sql Queries - sql_queries.py
 In that script is the class SqlQueries, that contain  the SQL needed load the dimension tables. and the SQL for quality purpose.
 
 ## Data Analytics  
